@@ -11,27 +11,26 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            GradeTracker book = CreateGradeBook();
-
+            IGradeTracker book = CreateGradeBook();
+            book.Name = "Jeff's Grade Book";
             GetBookName(book);
             AddGrades(book);
             SaveGrades(book);
             WriteResults(book);
 
-            book.NameChanged += new NameChangedDelegate(OnNameChanged);
+            //book.NameChanged += new NameChangedDelegate(OnNameChanged);
             book.NameChanged += OnNameChanged; //you can remove new NameChangedDelegate (C# is smart enough to recognize it is tied to a delegate
 
-            //book.Name = "Jeff's Grade Book";
-            //book.Name = "";
+
 
         }
 
-        private static GradeTracker CreateGradeBook()
+        private static IGradeTracker CreateGradeBook()
         {
             return new ThrowAwayGradeBook();
         }
 
-        private static void WriteResults(GradeTracker book)
+        private static void WriteResults(IGradeTracker book)
         {
             GradeStatistics stats = book.ComputeStatistics();
             Console.WriteLine(book.Name);
@@ -42,7 +41,7 @@ namespace Grades
             WriteResult("Description", stats.Description);
         }
 
-        private static void SaveGrades(GradeTracker book)
+        private static void SaveGrades(IGradeTracker book)
         {
             using (StreamWriter outputFile = File.CreateText("grades.txt"))
             {
@@ -50,7 +49,7 @@ namespace Grades
             }
         }
 
-        private static void AddGrades(GradeTracker book)
+        private static void AddGrades(IGradeTracker book)
         {
             book.AddGrade(97);
             book.AddGrade(89.5f);
@@ -59,7 +58,7 @@ namespace Grades
             book.AddGrade(65);
         }
 
-        private static void GetBookName(GradeTracker book)
+        private static void GetBookName(IGradeTracker book)
         {
             try
             {

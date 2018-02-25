@@ -10,5 +10,6 @@ namespace Grades
         void WriteGrade(TextWriter destination);
         event NameChangedDelegate NameChanged;
         string Name { get; set; }
+        object Update { get; set; }
     }
 }

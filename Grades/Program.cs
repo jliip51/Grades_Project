@@ -21,8 +21,6 @@ namespace Grades
             //book.NameChanged += new NameChangedDelegate(OnNameChanged);
             book.NameChanged += OnNameChanged; //you can remove new NameChangedDelegate (C# is smart enough to recognize it is tied to a delegate
 
-
-
         }
 
         private static IGradeTracker CreateGradeBook()
@@ -34,11 +32,13 @@ namespace Grades
         {
             GradeStatistics stats = book.ComputeStatistics();
             Console.WriteLine(book.Name);
+            Console.WriteLine(book.Update);
 
             foreach  (float grade in book)
             {
                 Console.WriteLine(grade);
             }
+
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Lowest", stats.LowestGrade);
             WriteResult("Highest", stats.HighestGrade);
@@ -69,6 +69,7 @@ namespace Grades
             {
                 Console.WriteLine("Input a name for your grade book");
                 book.Name = Console.ReadLine();
+                book.Update = DateTime.Now;
             }
             catch (ArgumentException ex)
             {

@@ -52,5 +52,6 @@ namespace Grades
         }
 
         protected List<float> grades;
+
     }
 }

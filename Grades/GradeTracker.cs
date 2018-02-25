@@ -14,6 +14,13 @@ namespace Grades
         public abstract GradeStatistics ComputeStatistics();
         public abstract void WriteGrade(TextWriter destination);
         public abstract IEnumerator GetEnumerator();
+        public object Update
+        {
+            get => _datetime;
+            set => _datetime = value;
+        }
+
+
         public string Name
         {
             get
@@ -41,5 +48,7 @@ namespace Grades
         public event NameChangedDelegate NameChanged;
 
         protected string _name;
+
+        protected object _datetime;
     }
 }
